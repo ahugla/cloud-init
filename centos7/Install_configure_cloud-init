@@ -37,7 +37,7 @@ pip3.6 install -r requirements.txt
 python3.6 setup.py build
 python3.6 setup.py install --init-system systemd
 
-cloud-init status  # is disabled
+cloud-init status  # is 'disabled' now
 cd /tmp
 rm -rf /tmp/cloud-init
 
@@ -54,7 +54,8 @@ done
 echo -e " \n \n "  >> /etc/cloud/cloud.cfg
 echo "# ALEX CONF" >> /etc/cloud/cloud.cfg
 echo "# ---------" >> /etc/cloud/cloud.cfg
-echo "datasource_list: [ NoCloud, ConfigDrive, OpenNebula, Azure, AltCloud, OVF, MAAS, GCE, OpenStack, CloudSigma, None ]" >> /etc/cloud/cloud.cfg
+# initial : datasource_list: [ NoCloud, ConfigDrive, OpenNebula, Azure, AltCloud, OVF, MAAS, GCE, OpenStack, CloudSigma, Ec2, CloudStack, None ]
+echo "datasource_list: [ NoCloud, AltCloud, OVF, MAAS, GCE, OpenStack, CloudSigma, None ]" >> /etc/cloud/cloud.cfg
 echo "disable_vmware_customization: false" >> /etc/cloud/cloud.cfg
 
 sed -i -e '/disable_root: true/s/^/#/g'  /etc/cloud/cloud.cfg      # default: disable_root: true
@@ -75,7 +76,7 @@ cloud-init init --local  #juste une verif, peu prendre du temps
 
 rm -f /var/log/cloud-init.log
 rm -f /var/log/cloud-init-output.log
-#rm -rf /var/lib/cloud  ????????????????  NECESSAIRE????
+
 
 
 
@@ -85,5 +86,7 @@ rm -f /var/log/cloud-init-output.log
 #systemctl start cloud-init.service
 #systemctl start cloud-config.service
 #systemctl start cloud-final.service
+
+
 
 
