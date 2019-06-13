@@ -10,12 +10,14 @@ sudo apt-get install --only-upgrade cloud-init
 
 # clean all (normalement seul 'rm /var/log/boot.log' est necessaire car fresh install)
 # ------------------------------------------------------------------------------------
-sudo rm -f /var/log/boot.log
-sudo rm -f /var/log/cloud-init.log
-sudo rm -f /var/log/cloud-init-output.log
-sudo rm -f /var/log/vmware-network*.log
-sudo rm -rf /var/lib/cloud
-sudo rm -f /etc/sudoers.d/90-cloud-init-users
+sudo -i 
+rm -f /var/log/boot.log
+rm -f /var/log/cloud-init.log
+rm -f /var/log/cloud-init-output.log
+rm -f /var/log/vmware-network*.log
+rm -rf /var/lib/cloud
+rm -f /etc/sudoers.d/90-cloud-init-users
+exit
 
 
 
@@ -41,7 +43,7 @@ sed -i -e 's/    lock_passwd: True/    lock_passwd: false/g'  /etc/cloud/cloud.c
 
 
 #Comment out this line in the /usr/lib/tmpfiles.d/tmp.conf file:   D /tmp 1777 root root -
-sed -i -e '/tmp 1777 root root/s/^/#/g' /usr/lib/tmpfiles.d/tmp.conf
+sed -i -e '/tmp 1777 root root -/s/^/#/g' /usr/lib/tmpfiles.d/tmp.conf
 
 # if you have open-vm-tools installed, Add this line “After=dbus.service” under [Unit] in /lib/systemd/system/open-vm-tools.service file
 sed -i -e '/\[Unit\]/a After=dbus.service' /lib/systemd/system/open-vm-tools.service
@@ -50,8 +52,8 @@ sed -i -e '/\[Unit\]/a After=dbus.service' /lib/systemd/system/open-vm-tools.ser
 rm -f /etc/cloud/cloud.cfg.d/50-curtin-networking.cfg 
 
 
-
-exit   #exit du sudo -i
+#exit du sudo -i
+exit
 
 
 # COMMENT
