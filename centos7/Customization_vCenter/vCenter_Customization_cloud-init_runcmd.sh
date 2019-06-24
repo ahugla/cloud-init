@@ -37,9 +37,7 @@ echo "ssh_pwauth: yes" >> /etc/cloud/cloud.cfg
 sed -i -e 's/    lock_passwd: true/    lock_passwd: false/g'  /etc/cloud/cloud.cfg    # default:  lock_passwd: true
 
 
-# UTILE ????
-# ----------
-echo "disable_vmware_customization: true" >> /etc/cloud/cloud.cfg
+#echo "disable_vmware_customization: true" >> /etc/cloud/cloud.cfg   #inutile
 
 
 # On desactive la config reseau de cloud-init  (c est vCenter qui le fait)
